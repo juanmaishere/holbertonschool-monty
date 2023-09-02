@@ -2,45 +2,33 @@
 
 data_t dat;
 
-void _push(stack_t **stack, unsigned int line_number)
-{   
-    char *token = dat.tokens[1];
-    int i = 0, c = 0;
-    stack_t *node;
+void push(stack_t **stack, unsigned int line_number)
+{
+	stack_t *node;
+	char *num;
 
-    if (!dat.tokens[1])
-    {
-        fprintf(stderr, "L%u: usage: push integer\n", line_number);
-        exit(EXIT_FAILURE);
-    }
-    
-    while (token[i])
-    {
-    if (!isdigit(token[i]) && (i == 0 && token[i] != '-' && token[i] != '+'))
-    {
-        fprintf(stderr, "L%u: usage: push integer\n", line_number);
-        exit(EXIT_FAILURE);
-    }
-    i++;
-    }
-    
-    c = atoi(dat.tokens[1]);
+	num = strtok(NULL, DELIMS);
+	if (num == NULL)
+	{
+		printf("L%u: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
+	}
 
-    node = malloc(sizeof(stack_t));
-    if (!node)
-    {
-        perror("Error: Unable to allocate memory");
-        exit(EXIT_FAILURE);
-    }
+	node = malloc(sizeof(stack_t));
+	if (node == NULL)
+	{
+		printf("Error: malloc failed\n");
+		exit(EXIT_FAILURE);
+	}
 
-    node->n = c;
-    node->prev = NULL;
-    node->next = *stack;
+	node->n = atoi(num);
+	node->prev = NULL;
+	node->next = *stack;
 
-    if (*stack)
-        (*stack)->prev = node;
+	if (*stack != NULL)
+		(*stack)->prev = node;
 
-    *stack = node;
+	*stack = node;
 }
 void
 _pall(stack_t **stack, __attribute__((unused))unsigned int line_number)
