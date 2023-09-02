@@ -2,7 +2,8 @@
 #include <ctype.h>
 #define DELIM " \n\t\r"
 data_t dat;
-void _push(stack_t **stack, unsigned int line_number)
+void
+_push(stack_t **stack, unsigned int line_number)
 {
     char *token = dat.tokens[1];
     int c = 0;
@@ -80,7 +81,8 @@ void
     exit(EXIT_FAILURE);
 }
 
-int main(int argc, char *argv[])
+int
+main(int argc, char *argv[])
 {
     int line_number = 0;
     FILE *file;
@@ -97,7 +99,7 @@ int main(int argc, char *argv[])
     file = fopen(argv[1], "r");
     if (file == NULL)
     {
-        fprintf(stderr,"Error opening file %s", argv[1]);
+        fprintf(stderr,"Error: Can't open file %s", argv[1]);
         return (EXIT_FAILURE);
     }
 
