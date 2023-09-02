@@ -5,7 +5,7 @@ data_t dat;
 void _push(stack_t **stack, unsigned int line_number)
 {
     char *token = strtok(NULL, DELIM);
-    int i = 0, c = 0;
+    int c = 0;
     stack_t *node;
 
     if (!dat.tokens[1])
