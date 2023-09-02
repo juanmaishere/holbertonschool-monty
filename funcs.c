@@ -24,6 +24,12 @@ _pint(stack_t **stack, unsigned int line_number)
 {
     (void)line_number;
 
+    if (isvalid(dat.tokens[0]) == 0)
+    {
+    fprintf(stderr, "L%u: unknown instruction %s", line_number, dat.tokens[0]);
+        exit(EXIT_FAILURE);
+    }
+
 	if (!(*stack))
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
@@ -31,4 +37,18 @@ _pint(stack_t **stack, unsigned int line_number)
 	}
 	stack_t *line = *stack;
     printf("%d\n", line->n);
+}
+int
+isvalid(const char *instruction)
+{
+    int len = strlen(instruction);
+
+    if (len > 4)
+    {
+        return (0);
+    }
+    else
+    {
+        return (1);
+    }
 }

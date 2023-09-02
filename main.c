@@ -9,6 +9,11 @@ _push(stack_t **stack, unsigned int line_number)
     int c = 0;
     stack_t *node;
 
+    if (isvalid(dat.tokens[0]) == 0)
+    {
+    fprintf(stderr, "L%u: unknown instruction %s", line_number, dat.tokens[0]);
+        exit(EXIT_FAILURE);
+    }
     if (!dat.tokens[1])
     {
         fprintf(stderr, "L%u: usage: push integer\n", line_number);
