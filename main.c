@@ -3,8 +3,9 @@
 data_t dat;
 
 void _push(stack_t **stack, unsigned int line_number)
-{
-    int c = 0;
+{   
+    char *token = dat.tokens[1];
+    int i = 0, c = 0;
     stack_t *node;
 
     if (!dat.tokens[1])
@@ -12,7 +13,17 @@ void _push(stack_t **stack, unsigned int line_number)
         fprintf(stderr, "L%u: usage: push integer\n", line_number);
         exit(EXIT_FAILURE);
     }
-
+    
+    while (token[i])
+    {
+    if (!isdigit(token[i]) && (i == 0 && token[i] != '-' && token[i] != '+'))
+    {
+        fprintf(stderr, "L%u: usage: push integer\n", line_number);
+        exit(EXIT_FAILURE);
+    }
+    i++;
+    }
+    
     c = atoi(dat.tokens[1]);
 
     node = malloc(sizeof(stack_t));
@@ -90,7 +101,7 @@ int main(int argc, char *argv[])
     file = fopen(argv[1], "r");
     if (file == NULL)
     {
-        perror("Error opening file");
+        perror("Error opening file %s", argv[1]);
         return (EXIT_FAILURE);
     }
 
