@@ -22,6 +22,7 @@ isInteger(const char string[])
 void
 _pint(stack_t **stack, unsigned int line_number)
 {
+    int c = 0;
     (void)line_number;
     c = isvalid(dat.tokens[0]);
 
