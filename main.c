@@ -2,7 +2,7 @@
 data_t dat;
 void _push(stack_t **stack, unsigned int line_number)
 {
-    char *token = dat.tokens[1];
+    char *token = strtok(NULL, DELIM);
     int i = 0, c = 0;
     stack_t *node;
 
@@ -12,15 +12,11 @@ void _push(stack_t **stack, unsigned int line_number)
         exit(EXIT_FAILURE);
     }
 
-    while (token[i])
-    {
-        if (!isdigit(token[i]) && (i == 0 && token[i] != '-' && token[i] != '+'))
-        {
-            fprintf(stderr, "L%u: usage: push integer\n", line_number);
-            exit(EXIT_FAILURE);
-        }
-        i++;
-    }
+    if (!token || _digit(token) == 0 || !stack)
+	{
+		fprintf(stderr, "L%u: usage: push integer\n", line_number);
+		exit(EXIT_FAILURE);
+	}
 
     c = atoi(dat.tokens[1]);
 
