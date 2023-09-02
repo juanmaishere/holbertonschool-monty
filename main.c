@@ -7,7 +7,7 @@ void _push(stack_t **stack, unsigned int line_number)
     int c = 0;
     stack_t *node;
 
-    if (!dat.tokens[1])
+    if (isdigit(dat.tokens[1]) != 0)
     {
         fprintf(stderr, "L%u: usage: push integer\n", line_number);
         exit(EXIT_FAILURE);
@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
 
     if (argc != 2)
     {
-        fprintf(stderr, "USAGE: %s file", argv[0]);
+        fprintf(stderr, "USAGE: monty file");
         return (EXIT_FAILURE);
     }
 
