@@ -23,8 +23,9 @@ void
 _pint(stack_t **stack, unsigned int line_number)
 {
     (void)line_number;
+    c = isvalid(dat.tokens[0]);
 
-    if (isvalid(dat.tokens[0]) == 0)
+    if (c == 0)
     {
     fprintf(stderr, "L%u: unknown instruction %s", line_number, dat.tokens[0]);
         exit(EXIT_FAILURE);
