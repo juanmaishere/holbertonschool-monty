@@ -1,7 +1,7 @@
 #include "monty.h"
 #define DELIMS "\n \r\t"
 data_t dat;
-void push(stack_t **stack, unsigned int line_number)
+void _push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *node;
 	char *num;
