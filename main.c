@@ -1,5 +1,6 @@
 #include "monty.h"
 data_t dat;
+#define DELIM " \n\t\r"
 void _push(stack_t **stack, unsigned int line_number)
 {
     char *token = strtok(NULL, DELIM);
