@@ -54,3 +54,32 @@ isvalid(const char *instruction)
         return (1);
     }
 }
+void
+__pop(stack_t **stack, unsigned int line_number)
+{
+	stack_t *temp = *stack;
+
+	if (!stack || !(*stack))
+	{
+		fprintf(stderr, "L%d: can't pop an empty stack\n", line_number);
+		exit(EXIT_FAILURE);
+	}
+    *stack = (*stack)->next;
+    free(temp);
+}
+void
+_swap(stack_t **stack, unsigned int line_number)
+{   
+    int temp = 0;
+
+    if (!stack || !*stack || !((*stack)->next))
+    {
+        fprintf(stderr, "L%d: can't swap, stack too short\n", line_number);
+        exit(EXIT_FAILURE);
+    }
+
+
+    temp = (*stack)->n;
+    (*stack)->n = (*stack)->next->n;
+    (*stack)->next->n = temp;
+}

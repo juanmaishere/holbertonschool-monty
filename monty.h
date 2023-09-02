@@ -32,6 +32,8 @@ void _push(stack_t **stack, unsigned int line_number);
 void _pint(stack_t **stack, unsigned int line_number);
 void _pall(stack_t **stack, unsigned int line_number);
 int isvalid(const char *instruction);
+void __pop(stack_t **stack, unsigned int line_number);
+void _swap(stack_t **stack, unsigned int line_number);
 void nop_f(stack_t **stack, unsigned int line_number);
 void (*getfunc(char *op))(stack_t **stack, unsigned int line_number);
 
