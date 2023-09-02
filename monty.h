@@ -27,6 +27,7 @@ typedef struct data_s
 extern data_t dat;
 
 int main(int argc, char *argv[]);
+int isInteger(const char string[]);
 void _push(stack_t **stack, unsigned int line_number);
 void _pall(stack_t **stack, unsigned int line_number);
 void nop_f(stack_t **stack, unsigned int line_number);
