@@ -65,6 +65,7 @@ void
     {
         {"push", _push},
         {"pall", _pall},
+        {"pint", _pint},
         {"nop", nop_f},
         {NULL, NULL}
     };
