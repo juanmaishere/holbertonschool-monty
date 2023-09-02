@@ -1,33 +1,44 @@
 #include "monty.h"
-#define DELIMS "\n \r\t"
 data_t dat;
 void _push(stack_t **stack, unsigned int line_number)
 {
-	stack_t *node;
-	char *num;
+    char *token = dat.tokens[1];
+    int i = 0, c = 0;
+    stack_t *node;
 
-	num = strtok(NULL, DELIMS);
-	if (num == NULL)
-	{
-		printf("L%u: usage: push integer\n", line_number);
-		exit(EXIT_FAILURE);
-	}
+    if (!dat.tokens[1])
+    {
+        fprintf(stderr, "L%u: usage: push integer\n", line_number);
+        exit(EXIT_FAILURE);
+    }
 
-	node = malloc(sizeof(stack_t));
-	if (node == NULL)
-	{
-		printf("Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
+    while (token[i])
+    {
+        if (!isdigit(token[i]) && (i == 0 && token[i] != '-' && token[i] != '+'))
+        {
+            fprintf(stderr, "L%u: usage: push integer\n", line_number);
+            exit(EXIT_FAILURE);
+        }
+        i++;
+    }
 
-	node->n = atoi(num);
-	node->prev = NULL;
-	node->next = *stack;
+    c = atoi(dat.tokens[1]);
 
-	if (*stack != NULL)
-		(*stack)->prev = node;
+    node = malloc(sizeof(stack_t));
+    if (!node)
+    {
+        perror("Error: Unable to allocate memory");
+        exit(EXIT_FAILURE);
+    }
 
-	*stack = node;
+    node->n = c;
+    node->prev = NULL;
+    node->next = *stack;
+
+    if (*stack)
+        (*stack)->prev = node;
+
+    *stack = node;
 }
 void
 _pall(stack_t **stack, __attribute__((unused))unsigned int line_number)
