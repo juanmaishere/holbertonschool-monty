@@ -73,6 +73,7 @@ void
         {"pint", _pint},
         {"pop", __pop},
         {"swap", _swap},
+        {"add", _add},
         {"nop", nop_f},
         {NULL, NULL}
     };

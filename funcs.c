@@ -83,3 +83,17 @@ _swap(stack_t **stack, unsigned int line_number)
     (*stack)->n = (*stack)->next->n;
     (*stack)->next->n = temp;
 }
+void _add(stack_t **stack, unsigned int line_number)
+{
+    if (!stack || !*stack || !((*stack)->next))
+    {
+        fprintf(stderr, "L%d: can't add, stack too short\n", line_number);
+        exit(EXIT_FAILURE);
+    }
+
+    // Add the top two elements and store the result in the second top element
+    (*stack)->next->n += (*stack)->n;
+
+    // Remove the top element
+    __pop(stack, line_number);
+}
