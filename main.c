@@ -101,7 +101,7 @@ int main(int argc, char *argv[])
     file = fopen(argv[1], "r");
     if (file == NULL)
     {
-        perror("Error opening file %s", argv[1]);
+        fprintf(stderr,"Error opening file %s", argv[1]);
         return (EXIT_FAILURE);
     }
 
