@@ -37,5 +37,4 @@ void _add(stack_t **stack, unsigned int line_number);
 void _swap(stack_t **stack, unsigned int line_number);
 void nop_f(stack_t **stack, unsigned int line_number);
 void (*getfunc(char *op))(stack_t **stack, unsigned int line_number);
-
 #endif

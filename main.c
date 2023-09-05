@@ -1,5 +1,4 @@
 #include "monty.h"
-#include <ctype.h>
 #define DELIM " \n\t\r"
 data_t dat;
 void
@@ -11,7 +10,7 @@ _push(stack_t **stack, unsigned int line_number)
 
     if (isvalid(dat.tokens[0]) == 0)
     {
-    fprintf(stderr, "L%u: unknown instruction %s", line_number, dat.tokens[0]);
+    fprintf(stderr, "L%u: unknown instruction %s\n", line_number, dat.tokens[0]);
         exit(EXIT_FAILURE);
     }
     if (!dat.tokens[1])
@@ -97,7 +96,7 @@ main(int argc, char *argv[])
     FILE *file;
     char *line = NULL;
     size_t len = 0;
-    ssize_t read = 0;
+    int read = 0;
 
     if (argc != 2)
     {
@@ -128,7 +127,20 @@ main(int argc, char *argv[])
 
         dat.tokens[0] = tokens[0];
         dat.tokens[1] = tokens[1];
+    
 
+    if (isvalid(dat.tokens[0]) == 0)
+    {
+    fprintf(stderr, "L%u: unknown instruction %s", line_number, dat.tokens[0]);
+    exit(EXIT_FAILURE);
+    }
+    if (isInteger(dat.tokens[1]) == 0)
+    {
+    fprintf(stderr, "L%u: usage: push integer\n", line_number);
+    exit(EXIT_FAILURE);
+    }
+
+        
         void (*instruction_func)(stack_t **, unsigned int) = getfunc(dat.tokens[0]);
         if (instruction_func)
         {
