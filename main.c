@@ -1,20 +1,22 @@
 #include "monty.h"
 #define DELIM " \n\t\r"
 data_t dat;
-void
-_push(stack_t **stack, unsigned int line_number)
+void _push(stack_t **stack, unsigned int line_number)
 {
-    char *token = dat.tokens[1];
-    int c = 0;
+    (void)line_number;
     stack_t *node;
 
-    if (!token || isInteger(token) == 0 || !stack)
-	{
-		fprintf(stderr, "L%u: usage: push integer\n", line_number);
-		exit(EXIT_FAILURE);
-	}
+    if (!dat.tokens[1])
+    {
+        fprintf(stderr, "L%u: usage: push integer\n", line_number);
+        exit(EXIT_FAILURE);
+    }
 
-    c = atoi(dat.tokens[1]);
+    if (!isInteger(dat.tokens[1]))
+    {
+        fprintf(stderr, "L%u: usage: push integer\n", line_number);
+        exit(EXIT_FAILURE);
+    }
 
     node = malloc(sizeof(stack_t));
     if (!node)
@@ -23,7 +25,7 @@ _push(stack_t **stack, unsigned int line_number)
         exit(EXIT_FAILURE);
     }
 
-    node->n = c;
+    node->n = atoi(dat.tokens[1]);
     node->prev = NULL;
     node->next = *stack;
 
@@ -78,8 +80,7 @@ void
     exit(EXIT_FAILURE);
 }
 
-int
-main(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
     int line_number = 0;
     FILE *file;
@@ -96,7 +97,7 @@ main(int argc, char *argv[])
     file = fopen(argv[1], "r");
     if (file == NULL)
     {
-        fprintf(stderr,"Error: Can't open file %s\n", argv[1]);
+        fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
         return (EXIT_FAILURE);
     }
 
@@ -116,37 +117,39 @@ main(int argc, char *argv[])
 
         dat.tokens[0] = tokens[0];
         dat.tokens[1] = tokens[1];
-    
 
-    if (isvalid(dat.tokens[0]) == 0)
-    {
-    fprintf(stderr, "L%u: unknown instruction %s\n", line_number, dat.tokens[0]);
-    exit(EXIT_FAILURE);
-    }
-    if (strcmp(dat.tokens[1], "push" == 0))    
-    {
-    if (isInteger(dat.tokens[1]) == 0)
-    {
-    fprintf(stderr, "L%u: usage: push integer\n", line_number);
-    exit(EXIT_FAILURE);
-    }
-
-        
-        void (*instruction_func)(stack_t **, unsigned int) = getfunc(dat.tokens[0]);
-        if (instruction_func)
+        if (isvalid(dat.tokens[0]) == 0)
         {
-            instruction_func(&dat.top, line_number);
-        }
-        else
-        {
-            fprintf(stderr, "L%u: Invalid instruction %s\n", line_number, dat.tokens[0]);
+            fprintf(stderr, "L%u: unknown instruction %s\n", line_number, dat.tokens[0]);
             exit(EXIT_FAILURE);
         }
 
-        for (int j = 0; j < i; j++)
+        if (strcmp(dat.tokens[0], "push") == 0)
         {
-            free(tokens[j]);
+            if (isInteger(dat.tokens[1]) == 0)
+            {
+                fprintf(stderr, "L%u: usage: push integer\n", line_number);
+                exit(EXIT_FAILURE);
+            }
         }
+        
+        void (*instruction_func)(stack_t **, unsigned int) = getfunc(dat.tokens[0]);
+            
+            if (instruction_func)
+            {
+                instruction_func(&dat.top, line_number);
+            }
+            else
+            {
+                fprintf(stderr, "L%u: Invalid instruction %s\n", line_number, dat.tokens[0]);
+                exit(EXIT_FAILURE);
+            }
+
+            for (int j = 0; j < i; j++)
+            {
+                free(tokens[j]);
+            }
+        
     }
 
     if (line)
