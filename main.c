@@ -8,17 +8,6 @@ _push(stack_t **stack, unsigned int line_number)
     int c = 0;
     stack_t *node;
 
-    if (isvalid(dat.tokens[0]) == 0)
-    {
-    fprintf(stderr, "L%u: unknown instruction %s\n", line_number, dat.tokens[0]);
-        exit(EXIT_FAILURE);
-    }
-    if (!dat.tokens[1])
-    {
-        fprintf(stderr, "L%u: usage: push integer\n", line_number);
-        exit(EXIT_FAILURE);
-    }
-
     if (!token || isInteger(token) == 0 || !stack)
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
@@ -131,7 +120,7 @@ main(int argc, char *argv[])
 
     if (isvalid(dat.tokens[0]) == 0)
     {
-    fprintf(stderr, "L%u: unknown instruction %s", line_number, dat.tokens[0]);
+    fprintf(stderr, "L%u: unknown instruction %s\n", line_number, dat.tokens[0]);
     exit(EXIT_FAILURE);
     }
     if (isInteger(dat.tokens[1]) == 0)
