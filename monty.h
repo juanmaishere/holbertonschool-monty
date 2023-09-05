@@ -26,15 +26,15 @@ typedef struct data_s
 
 extern data_t dat;
 
-int main(int argc, char *argv[]);
-int isInteger(const char string[]);
+int main(int argc, char *argv[]);git 
 void _push(stack_t **stack, unsigned int line_number);
 void _pint(stack_t **stack, unsigned int line_number);
 void _pall(stack_t **stack, unsigned int line_number);
-int isvalid(const char *instruction);
 void __pop(stack_t **stack, unsigned int line_number);
 void _add(stack_t **stack, unsigned int line_number);
 void _swap(stack_t **stack, unsigned int line_number);
 void nop_f(stack_t **stack, unsigned int line_number);
+int isvalid(const char *instruction);
+int isInteger(const char string[]);
 void (*getfunc(char *op))(stack_t **stack, unsigned int line_number);
 #endif

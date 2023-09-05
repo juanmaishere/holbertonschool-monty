@@ -118,18 +118,17 @@ main(int argc, char *argv[])
         dat.tokens[1] = tokens[1];
     
 
-    if (isvalid(tokens[0]) == 0)
+    if (isvalid(dat.tokens[0]) == 0)
     {
     fprintf(stderr, "L%u: unknown instruction %s\n", line_number, dat.tokens[0]);
     exit(EXIT_FAILURE);
     }
-    if (strcmp(tokens[1], "push") == 0) 
+    if (strcmp(dat.tokens[1], "push" == 0))    
     {
-        if (isInteger(tokens[1]) == 0)
-        {
-        fprintf(stderr, "L%u: usage: push integer\n", line_number);
-        exit(EXIT_FAILURE);
-        }
+    if (isInteger(dat.tokens[1]) == 0)
+    {
+    fprintf(stderr, "L%u: usage: push integer\n", line_number);
+    exit(EXIT_FAILURE);
     }
 
         
